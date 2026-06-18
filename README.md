@@ -2,6 +2,8 @@
 
 **Collect and display testimonials that convert.**
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/kindrat86/praiso)
+
 Praiso lets you collect testimonials from customers via a shareable link, moderate them in a dashboard, and display them on your website with one line of embed code.
 
 ## Features
