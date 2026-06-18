@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title %}Praiso — Collect & Display Testimonials That Convert{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/pricing" class="text-sm text-gray-600 hover:text-gray-900">Pricing</a>
+    <a href="/login" class="text-sm text-gray-600 hover:text-gray-900">Log in</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+
+<section class="pt-20 pb-16 px-6">
+<div class="max-w-4xl mx-auto text-center">
+  <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+    Social proof that<br><span class="text-indigo-600">actually converts</span>
+  </h1>
+  <p class="text-xl text-gray-500 max-w-2xl mx-auto mb-10">
+    Collect testimonials from your customers. Display them on your website with one line of code. Watch conversion rates climb.
+  </p>
+  <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+    <a href="/signup" class="bg-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-indigo-700 shadow-lg shadow-indigo-200">
+      Start collecting — it's free
+    </a>
+  </div>
+  <p class="text-sm text-gray-400">Free plan: 10 testimonials, 1 project. No credit card.</p>
+</div>
+</section>
+
+<section class="py-16 px-6 bg-white">
+<div class="max-w-5xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-12">Dead simple. Three steps.</h2>
+  <div class="grid md:grid-cols-3 gap-10">
+    <div class="text-center">
+      <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-indigo-600 font-bold text-xl">1</div>
+      <h3 class="font-semibold mb-2">Create a collection page</h3>
+      <p class="text-gray-500 text-sm">Branded form where your customers leave testimonials. Share the link or embed it.</p>
+    </div>
+    <div class="text-center">
+      <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-indigo-600 font-bold text-xl">2</div>
+      <h3 class="font-semibold mb-2">Approve the best ones</h3>
+      <p class="text-gray-500 text-sm">Review testimonials in your dashboard. Approve, reject, or feature your favorites.</p>
+    </div>
+    <div class="text-center">
+      <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-indigo-600 font-bold text-xl">3</div>
+      <h3 class="font-semibold mb-2">Embed on your site</h3>
+      <p class="text-gray-500 text-sm">One script tag. Beautiful widget. Carousel, grid, or wall of love. Light or dark theme.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="py-16 px-6">
+<div class="max-w-5xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-12">Why Praiso?</h2>
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white p-6 rounded-xl border">
+      <h3 class="font-semibold mb-2">🔗 Shareable collection page</h3>
+      <p class="text-gray-500 text-sm">Send one link. Customers leave a testimonial in 30 seconds. No signup required for them.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl border">
+      <h3 class="font-semibold mb-2">📋 One-line embed</h3>
+      <p class="text-gray-500 text-sm">Copy one script tag. Paste into any website. Works with WordPress, Webflow, Shopify, Next.js, anything.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl border">
+      <h3 class="font-semibold mb-2">⭐ Star ratings</h3>
+      <p class="text-gray-500 text-sm">Collect 1-5 star ratings with every testimonial. Display average rating. Rich snippets for SEO.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl border">
+      <h3 class="font-semibold mb-2">🎨 Widget themes</h3>
+      <p class="text-gray-500 text-sm">Carousel, grid, or wall of love. Light or dark. Matches your brand automatically.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl border">
+      <h3 class="font-semibold mb-2">✅ Moderation</h3>
+      <p class="text-gray-500 text-sm">Every testimonial is pending until you approve it. Feature your best ones. No spam on your site.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl border">
+      <h3 class="font-semibold mb-2">🚀 Fast & lightweight</h3>
+      <p class="text-gray-500 text-sm">Widget loads in under 50ms. No impact on your page speed. CDN-cached.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="pricing" class="py-16 px-6 bg-white">
+<div class="max-w-4xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-12">Pricing</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="border rounded-2xl p-8">
+      <h3 class="font-bold text-lg">Free</h3>
+      <div class="text-4xl font-extrabold my-4">$0</div>
+      <ul class="text-sm text-gray-500 space-y-2 mb-6 text-left">
+        <li>✓ 10 testimonials</li>
+        <li>✓ 1 project</li>
+        <li>✓ Collection page</li>
+        <li>✓ Embed widget</li>
+        <li>✓ Praiso branding</li>
+      </ul>
+      <a href="/signup" class="block border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50">Get started</a>
+    </div>
+    <div class="border-2 border-indigo-600 rounded-2xl p-8 relative">
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+      <h3 class="font-bold text-lg">Pro</h3>
+      <div class="text-4xl font-extrabold my-4">$29<span class="text-lg font-normal text-gray-400">/mo</span></div>
+      <ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+        <li>✓ 500 testimonials</li>
+        <li>✓ 10 projects</li>
+        <li>✓ Remove Praiso branding</li>
+        <li>✓ Custom themes</li>
+        <li>✓ Priority support</li>
+      </ul>
+      <a href="/signup" class="block bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700">Start free trial</a>
+    </div>
+    <div class="border rounded-2xl p-8">
+      <h3 class="font-bold text-lg">Business</h3>
+      <div class="text-4xl font-extrabold my-4">$79<span class="text-lg font-normal text-gray-400">/mo</span></div>
+      <ul class="text-sm text-gray-500 space-y-2 mb-6 text-left">
+        <li>✓ Unlimited testimonials</li>
+        <li>✓ Unlimited projects</li>
+        <li>✓ API access</li>
+        <li>✓ Custom CSS</li>
+        <li>✓ Team members</li>
+      </ul>
+      <a href="/signup" class="block border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50">Start free trial</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer class="py-10 px-6 text-center text-sm text-gray-400">
+  <p>© 2026 Praiso. Collect testimonials. Convert more customers.</p>
+</footer>
+{% endblock %}

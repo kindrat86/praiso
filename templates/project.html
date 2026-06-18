@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% block title %}{{ project.name }} — Praiso{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <a href="/dashboard" class="text-lg font-extrabold text-indigo-600">✦ Praiso</a>
+    <span class="text-gray-300">/</span>
+    <span class="text-sm font-medium text-gray-700">{{ project.name }}</span>
+  </div>
+  <a href="/logout" class="text-sm text-gray-400 hover:text-gray-600">Log out</a>
+</div>
+</nav>
+
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+  <!-- Tabs -->
+  <div class="flex gap-6 border-b mb-8 text-sm font-medium">
+    <button onclick="showTab('testimonials')" id="tab-testimonials" class="pb-3 border-b-2 border-indigo-600 text-indigo-600">Testimonials ({{ testimonials|length }})</button>
+    <button onclick="showTab('collect')" id="tab-collect" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700">Collect</button>
+    <button onclick="showTab('embed')" id="tab-embed" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700">Embed Widget</button>
+    <button onclick="showTab('settings')" id="tab-settings" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700">Settings</button>
+    <button onclick="showTab('add')" id="tab-add" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700">+ Add Manually</button>
+  </div>
+
+  <!-- TESTIMONIALS TAB -->
+  <div id="panel-testimonials">
+  {% if not testimonials %}
+    <div class="text-center py-16 text-gray-400">
+      <p class="text-lg mb-2">No testimonials yet</p>
+      <p class="text-sm">Share your collection page to start receiving testimonials.</p>
+    </div>
+  {% endif %}
+  <div class="space-y-4">
+  {% for t in testimonials %}
+    <div class="bg-white p-6 rounded-xl border {% if t.featured %}ring-2 ring-amber-400{% endif %}">
+      <div class="flex items-start justify-between">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-amber-400">{% for i in range(t.rating) %}★{% endfor %}{% for i in range(5 - t.rating) %}☆{% endfor %}</span>
+            <span class="text-xs px-2 py-0.5 rounded-full font-medium
+              {% if t.status == 'approved' %}bg-green-100 text-green-700
+              {% elif t.status == 'pending' %}bg-amber-100 text-amber-700
+              {% else %}bg-red-100 text-red-700{% endif %}">{{ t.status }}</span>
+            {% if t.featured %}<span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">⭐ Featured</span>{% endif %}
+          </div>
+          <p class="text-gray-700 mb-3">"{{ t.content }}"</p>
+          <div class="text-sm text-gray-500">
+            <span class="font-medium text-gray-700">{{ t.author_name }}</span>
+            {% if t.author_title %} · {{ t.author_title }}{% endif %}
+            {% if t.author_company %} at {{ t.author_company }}{% endif %}
+          </div>
+          <div class="text-xs text-gray-400 mt-1">{{ t.created_at.strftime('%b %d, %Y') }} · via {{ t.source }}</div>
+        </div>
+        <div class="flex gap-2 ml-4 flex-shrink-0">
+          {% if t.status != 'approved' %}
+          <form method="POST" action="/testimonial/{{ t.uid }}/approve">
+            <button class="text-xs bg-green-50 text-green-600 px-3 py-1.5 rounded-lg hover:bg-green-100 font-medium">Approve</button>
+          </form>
+          {% endif %}
+          {% if t.status != 'rejected' %}
+          <form method="POST" action="/testimonial/{{ t.uid }}/reject">
+            <button class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100 font-medium">Reject</button>
+          </form>
+          {% endif %}
+          <form method="POST" action="/testimonial/{{ t.uid }}/feature">
+            <button class="text-xs bg-amber-50 text-amber-600 px-3 py-1.5 rounded-lg hover:bg-amber-100 font-medium">{% if t.featured %}Unfeature{% else %}Feature{% endif %}</button>
+          </form>
+          <form method="POST" action="/testimonial/{{ t.uid }}/delete" onsubmit="return confirm('Delete this testimonial?')">
+            <button class="text-xs bg-gray-50 text-gray-500 px-3 py-1.5 rounded-lg hover:bg-gray-100 font-medium">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  </div>
+
+  <!-- COLLECT TAB -->
+  <div id="panel-collect" style="display:none">
+    <div class="bg-white p-8 rounded-xl border max-w-xl">
+      <h3 class="font-semibold mb-4">Your collection page</h3>
+      <div class="bg-gray-50 p-4 rounded-lg mb-4">
+        <code class="text-sm text-indigo-600 break-all">{{ base_url }}/collect/{{ project.uid }}</code>
+      </div>
+      <button onclick="navigator.clipboard.writeText('{{ base_url }}/collect/{{ project.uid }}')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Copy link</button>
+      <p class="text-sm text-gray-500 mt-4">Share this link with your customers. They can leave a testimonial without signing up.</p>
+    </div>
+  </div>
+
+  <!-- EMBED TAB -->
+  <div id="panel-embed" style="display:none">
+    <div class="bg-white p-8 rounded-xl border max-w-2xl">
+      <h3 class="font-semibold mb-4">Embed widget on your website</h3>
+      <p class="text-sm text-gray-500 mb-4">Copy this code and paste it anywhere in your HTML. The widget loads automatically.</p>
+      <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono mb-4 overflow-x-auto">
+        &lt;div id="praiso-widget"&gt;&lt;/div&gt;<br>
+        &lt;script src="{{ base_url }}/embed/{{ project.uid }}.js"&gt;&lt;/script&gt;
+      </div>
+      <button onclick="navigator.clipboard.writeText('<div id=\'praiso-widget\'></div>\n<script src=\'{{ base_url }}/embed/{{ project.uid }}.js\'></script>')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Copy embed code</button>
+      <h4 class="font-semibold mt-8 mb-4">Preview</h4>
+      <div id="praiso-widget"></div>
+      <script src="{{ base_url }}/embed/{{ project.uid }}.js"></script>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div id="panel-settings" style="display:none">
+    <form method="POST" action="/project/{{ project.uid }}/settings" class="bg-white p-8 rounded-xl border max-w-xl space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Project name</label>
+        <input type="text" name="name" value="{{ project.name }}" class="w-full border rounded-lg px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Website URL</label>
+        <input type="url" name="website_url" value="{{ project.website_url }}" placeholder="https://example.com" class="w-full border rounded-lg px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Collection page title</label>
+        <input type="text" name="collect_page_title" value="{{ project.collect_page_title }}" class="w-full border rounded-lg px-3 py-2 text-sm">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Collection page description</label>
+        <textarea name="collect_page_desc" rows="2" class="w-full border rounded-lg px-3 py-2 text-sm">{{ project.collect_page_desc }}</textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Thank you message</label>
+        <input type="text" name="thank_you_message" value="{{ project.thank_you_message }}" class="w-full border rounded-lg px-3 py-2 text-sm">
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Widget style</label>
+          <select name="widget_style" class="w-full border rounded-lg px-3 py-2 text-sm">
+            <option value="carousel" {% if project.widget_style == 'carousel' %}selected{% endif %}>Carousel</option>
+            <option value="grid" {% if project.widget_style == 'grid' %}selected{% endif %}>Grid</option>
+            <option value="wall" {% if project.widget_style == 'wall' %}selected{% endif %}>Wall of Love</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Widget theme</label>
+          <select name="widget_theme" class="w-full border rounded-lg px-3 py-2 text-sm">
+            <option value="light" {% if project.widget_theme == 'light' %}selected{% endif %}>Light</option>
+            <option value="dark" {% if project.widget_theme == 'dark' %}selected{% endif %}>Dark</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Save settings</button>
+    </form>
+  </div>
+
+  <!-- ADD MANUALLY TAB -->
+  <div id="panel-add" style="display:none">
+    <form method="POST" action="/testimonial/add/{{ project.uid }}" class="bg-white p-8 rounded-xl border max-w-xl space-y-4">
+      <h3 class="font-semibold">Add testimonial manually</h3>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+        <input type="text" name="author_name" required class="w-full border rounded-lg px-3 py-2 text-sm">
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+          <input type="text" name="author_title" placeholder="CEO" class="w-full border rounded-lg px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Company</label>
+          <input type="text" name="author_company" placeholder="Acme Inc" class="w-full border rounded-lg px-3 py-2 text-sm">
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Testimonial *</label>
+        <textarea name="content" required rows="4" class="w-full border rounded-lg px-3 py-2 text-sm"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
+        <select name="rating" class="border rounded-lg px-3 py-2 text-sm">
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★☆ (4)</option>
+          <option value="3">★★★☆☆ (3)</option>
+          <option value="2">★★☆☆☆ (2)</option>
+          <option value="1">★☆☆☆☆ (1)</option>
+        </select>
+      </div>
+      <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Add testimonial</button>
+    </form>
+  </div>
+</div>
+
+<script>
+function showTab(name) {
+  ['testimonials','collect','embed','settings','add'].forEach(t => {
+    document.getElementById('panel-'+t).style.display = t===name ? 'block' : 'none';
+    const tab = document.getElementById('tab-'+t);
+    if(t===name) {
+      tab.classList.add('border-indigo-600','text-indigo-600');
+      tab.classList.remove('border-transparent','text-gray-500');
+    } else {
+      tab.classList.remove('border-indigo-600','text-indigo-600');
+      tab.classList.add('border-transparent','text-gray-500');
+    }
+  });
+}
+</script>
+{% endblock %}

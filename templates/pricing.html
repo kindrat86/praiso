@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Pricing — Praiso{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/login" class="text-sm text-gray-600 hover:text-gray-900">Log in</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+<section class="py-20 px-6">
+<div class="max-w-4xl mx-auto text-center">
+  <h1 class="text-4xl font-bold mb-4">Simple pricing. No surprises.</h1>
+  <p class="text-gray-500 mb-12">Start free. Upgrade when you need more.</p>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="bg-white border rounded-2xl p-8">
+      <h3 class="font-bold text-lg">Free</h3>
+      <div class="text-4xl font-extrabold my-4">$0</div>
+      <ul class="text-sm text-gray-500 space-y-2 mb-6 text-left">
+        <li>✓ 10 testimonials</li><li>✓ 1 project</li><li>✓ Collection page</li><li>✓ Embed widget</li><li>✓ Praiso branding</li>
+      </ul>
+      <a href="/signup" class="block border text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50">Get started</a>
+    </div>
+    <div class="border-2 border-indigo-600 bg-white rounded-2xl p-8 relative">
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+      <h3 class="font-bold text-lg">Pro</h3>
+      <div class="text-4xl font-extrabold my-4">$29<span class="text-lg font-normal text-gray-400">/mo</span></div>
+      <ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+        <li>✓ 500 testimonials</li><li>✓ 10 projects</li><li>✓ No branding</li><li>✓ Custom themes</li><li>✓ Priority support</li>
+      </ul>
+      <a href="/signup" class="block bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700">Start free trial</a>
+    </div>
+    <div class="bg-white border rounded-2xl p-8">
+      <h3 class="font-bold text-lg">Business</h3>
+      <div class="text-4xl font-extrabold my-4">$79<span class="text-lg font-normal text-gray-400">/mo</span></div>
+      <ul class="text-sm text-gray-500 space-y-2 mb-6 text-left">
+        <li>✓ Unlimited</li><li>✓ Unlimited projects</li><li>✓ API access</li><li>✓ Custom CSS</li><li>✓ Team members</li>
+      </ul>
+      <a href="/signup" class="block border text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50">Start free trial</a>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}
