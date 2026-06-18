@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}FAQ — Praiso Testimonial Widgets{% endblock %}
+{% block head %}
+<meta name="description" content="Frequently asked questions about testimonial widgets, social proof, collecting reviews, and Praiso.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for faq in faqs %}
+    {
+      "@type": "Question",
+      "name": "{{ faq.q }}",
+      "acceptedAnswer": {"@type": "Answer", "text": "{{ faq.a }}"}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/use-cases" class="text-sm text-gray-600">Use Cases</a>
+    <a href="/blog" class="text-sm text-gray-600">Blog</a>
+    <a href="/pricing" class="text-sm text-gray-600">Pricing</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+<section class="py-16 px-6">
+<div class="max-w-3xl mx-auto">
+  <h1 class="text-4xl font-bold mb-12 text-center">Frequently Asked Questions</h1>
+  <div class="space-y-6">
+  {% for faq in faqs %}
+    <details class="bg-white border rounded-xl p-6 group" {% if loop.first %}open{% endif %}>
+      <summary class="flex items-center justify-between cursor-pointer font-semibold text-gray-900">
+        {{ faq.q }}
+        <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <p class="text-gray-600 mt-4 leading-relaxed">{{ faq.a }}</p>
+    </details>
+  {% endfor %}
+  </div>
+  <div class="mt-12 text-center">
+    <p class="text-gray-500 mb-4">Still have questions?</p>
+    <a href="/signup" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 inline-block">Try Praiso free</a>
+  </div>
+</div>
+</section>
+{% endblock %}

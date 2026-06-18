@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Use Cases — Praiso Testimonial Widgets{% endblock %}
+{% block head %}<meta name="description" content="See how different industries use Praiso to collect and display testimonials. From SaaS to real estate, find your use case.">{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/blog" class="text-sm text-gray-600">Blog</a>
+    <a href="/pricing" class="text-sm text-gray-600">Pricing</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+<section class="py-16 px-6">
+<div class="max-w-5xl mx-auto">
+  <h1 class="text-4xl font-bold text-center mb-4">Testimonial Widgets for Every Industry</h1>
+  <p class="text-gray-500 text-center mb-12 max-w-2xl mx-auto">See how businesses like yours use Praiso to collect and display social proof.</p>
+  <div class="grid md:grid-cols-3 gap-6">
+  {% for v in verticals %}
+    <a href="/for/{{ v.slug }}" class="bg-white border rounded-xl p-6 hover:border-indigo-300 transition block">
+      <h3 class="font-semibold mb-2">{{ v.title }}</h3>
+      <p class="text-sm text-gray-500">{{ v.desc }}</p>
+    </a>
+  {% endfor %}
+  </div>
+</div>
+</section>
+{% endblock %}

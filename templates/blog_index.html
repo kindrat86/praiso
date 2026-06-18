@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Blog — Praiso{% endblock %}
+{% block head %}<meta name="description" content="Learn about testimonials, social proof, and conversion optimization. Guides, templates, and strategies.">{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/use-cases" class="text-sm text-gray-600">Use Cases</a>
+    <a href="/pricing" class="text-sm text-gray-600">Pricing</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+<section class="py-16 px-6">
+<div class="max-w-3xl mx-auto">
+  <h1 class="text-4xl font-bold mb-12">Blog</h1>
+  <div class="space-y-8">
+  {% for post in posts %}
+    <a href="/blog/{{ post.slug }}" class="block bg-white border rounded-xl p-6 hover:border-indigo-300 transition">
+      <h2 class="text-xl font-semibold mb-2">{{ post.title }}</h2>
+      <p class="text-gray-500 text-sm">{{ post.meta_desc }}</p>
+    </a>
+  {% endfor %}
+  </div>
+</div>
+</section>
+{% endblock %}

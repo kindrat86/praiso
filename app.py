@@ -385,6 +385,113 @@ def widget_js(project_uid):
     return response
 
 
+# ========== SEO & pSEO ENGINE ==========
+
+PSEO_VERTICALS = [
+    {"slug": "saas", "title": "SaaS Companies", "desc": "Boost trial-to-paid conversion with customer testimonials on your SaaS landing page.", "keyword": "testimonial widget for SaaS"},
+    {"slug": "agencies", "title": "Marketing Agencies", "desc": "Win more clients by showcasing results. Display testimonials from happy clients.", "keyword": "testimonial widget for agencies"},
+    {"slug": "freelancers", "title": "Freelancers", "desc": "Build trust and win proposals with social proof from past clients on your portfolio.", "keyword": "testimonial widget for freelancers"},
+    {"slug": "ecommerce", "title": "E-commerce Stores", "desc": "Increase product trust and reduce returns with verified customer reviews.", "keyword": "testimonial widget for ecommerce"},
+    {"slug": "coaches", "title": "Coaches & Consultants", "desc": "Show transformation stories from past clients to fill your coaching calendar.", "keyword": "testimonial widget for coaches"},
+    {"slug": "real-estate", "title": "Real Estate Agents", "desc": "Let happy homebuyers sell your next listing. Testimonials that close deals.", "keyword": "testimonial widget for real estate"},
+    {"slug": "restaurants", "title": "Restaurants", "desc": "Turn rave reviews into more reservations with an embeddable testimonial wall.", "keyword": "testimonial widget for restaurants"},
+    {"slug": "dentists", "title": "Dentists & Clinics", "desc": "Patient testimonials that build trust before the first appointment.", "keyword": "testimonial widget for dentists"},
+    {"slug": "fitness", "title": "Fitness & Gyms", "desc": "Before-and-after stories from real members. The best marketing a gym can have.", "keyword": "testimonial widget for fitness"},
+    {"slug": "lawyers", "title": "Law Firms", "desc": "Client testimonials that establish credibility for your legal practice.", "keyword": "testimonial widget for lawyers"},
+    {"slug": "photographers", "title": "Photographers", "desc": "Couples and clients sharing their experience. Social proof that books shoots.", "keyword": "testimonial widget for photographers"},
+    {"slug": "startups", "title": "Startups", "desc": "Early customer love that convinces investors and new users alike.", "keyword": "testimonial widget for startups"},
+    {"slug": "wordpress", "title": "WordPress Sites", "desc": "One line of code. Beautiful testimonial widget on any WordPress site.", "keyword": "testimonial widget for WordPress"},
+    {"slug": "shopify", "title": "Shopify Stores", "desc": "Add customer reviews and testimonials to your Shopify store in seconds.", "keyword": "testimonial widget for Shopify"},
+    {"slug": "webflow", "title": "Webflow Sites", "desc": "Embed a testimonial carousel or wall of love in Webflow with one script tag.", "keyword": "testimonial widget for Webflow"},
+    {"slug": "nonprofits", "title": "Nonprofits", "desc": "Donor and volunteer stories that inspire more giving.", "keyword": "testimonial widget for nonprofits"},
+    {"slug": "b2b", "title": "B2B Companies", "desc": "Enterprise testimonials and case study snippets that shorten sales cycles.", "keyword": "B2B testimonial widget"},
+    {"slug": "course-creators", "title": "Course Creators", "desc": "Student success stories that sell your next cohort.", "keyword": "testimonial widget for online courses"},
+    {"slug": "therapists", "title": "Therapists", "desc": "Trusted client reviews that help new patients choose you with confidence.", "keyword": "testimonial widget for therapists"},
+    {"slug": "weddings", "title": "Wedding Vendors", "desc": "Happy couple testimonials that book your next season.", "keyword": "testimonial widget for wedding vendors"},
+]
+
+BLOG_POSTS = [
+    {"slug": "why-testimonials-increase-conversions", "title": "Why Testimonials Increase Conversions by 34%", "keyword": "testimonials increase conversions", "meta_desc": "Research shows testimonials boost conversion rates by 34%. Learn why social proof works and how to collect testimonials that convert."},
+    {"slug": "how-to-collect-testimonials", "title": "How to Collect Testimonials From Customers (2026 Guide)", "keyword": "how to collect testimonials", "meta_desc": "Step-by-step guide to collecting customer testimonials. Templates, timing, and tools that work."},
+    {"slug": "best-testimonial-widgets", "title": "7 Best Testimonial Widgets for Your Website (2026)", "keyword": "best testimonial widget", "meta_desc": "Compare the top testimonial widgets. Features, pricing, and which one is best for your site."},
+    {"slug": "testimonial-examples", "title": "50 Powerful Testimonial Examples That Convert", "keyword": "testimonial examples", "meta_desc": "Real testimonial examples from SaaS, e-commerce, agencies, and freelancers. Copy-paste templates included."},
+    {"slug": "social-proof-guide", "title": "The Complete Guide to Social Proof in 2026", "keyword": "social proof guide", "meta_desc": "Everything about social proof: types, psychology, and how to add it to your website."},
+    {"slug": "testimonial-request-email-templates", "title": "12 Testimonial Request Email Templates", "keyword": "testimonial request email", "meta_desc": "Copy-paste email templates to request testimonials from happy customers. Includes follow-up sequences."},
+]
+
+GEO_FAQS = [
+    {"q": "What is a testimonial widget?", "a": "A testimonial widget is an embeddable component that displays customer reviews and testimonials on your website. It typically shows the customer's name, photo, rating, and review text in a visually appealing format like a carousel, grid, or wall of love. Tools like Praiso let you collect testimonials via a shareable link, moderate them, and embed them on any website with one line of code."},
+    {"q": "How do I add testimonials to my website?", "a": "The easiest way is to use a testimonial collection tool like Praiso. Step 1: Create a free account and get a shareable collection link. Step 2: Send the link to your customers. Step 3: Approve the best testimonials in your dashboard. Step 4: Copy one line of embed code and paste it into your website HTML. The widget loads automatically and displays your approved testimonials."},
+    {"q": "What is the best testimonial widget for websites?", "a": "The best testimonial widgets in 2026 are Praiso, Senja, Testimonial.to, and Famewall. Praiso stands out for its simplicity: free tier with 10 testimonials, one-line embed code, star ratings, and carousel/grid/wall layouts. It works with any website including WordPress, Shopify, Webflow, and custom sites."},
+    {"q": "How many testimonials do I need on my website?", "a": "Research suggests 3-5 testimonials on your landing page is optimal. More than 10 can feel overwhelming. Quality matters more than quantity: one specific, detailed testimonial with metrics outperforms five generic ones. For product pages, 3 relevant testimonials near the CTA button typically increases conversion by 15-34%."},
+    {"q": "Do testimonials increase sales?", "a": "Yes. Studies show testimonials increase conversion rates by 34% on average. 92% of consumers read testimonials before making a purchase. Testimonials featuring specific results (numbers, timeframes, outcomes) perform 2-3x better than generic praise."},
+    {"q": "How do I ask customers for a testimonial?", "a": "The best time to ask is right after a positive interaction: a successful project delivery, a 5-star support ticket, or when they share praise spontaneously. Use a specific prompt like 'What specific result did you get from working with us?' and provide a simple link (like a Praiso collection page) where they can submit in 30 seconds."},
+]
+
+
+@app.route('/robots.txt')
+def robots():
+    base_url = request.host_url.rstrip('/')
+    txt = f"""User-agent: *
+Allow: /
+
+Sitemap: {base_url}/sitemap.xml
+"""
+    return make_response(txt), 200, {'Content-Type': 'text/plain'}
+
+
+@app.route('/sitemap.xml')
+def sitemap():
+    base_url = request.host_url.rstrip('/')
+    pages = [
+        ('/', '1.0', 'weekly'),
+        ('/pricing', '0.8', 'monthly'),
+        ('/faq', '0.8', 'monthly'),
+    ]
+    for v in PSEO_VERTICALS:
+        pages.append((f'/for/{v["slug"]}', '0.7', 'monthly'))
+    for p in BLOG_POSTS:
+        pages.append((f'/blog/{p["slug"]}', '0.7', 'weekly'))
+
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for path, priority, freq in pages:
+        xml += f'  <url><loc>{base_url}{path}</loc><priority>{priority}</priority><changefreq>{freq}</changefreq></url>\n'
+    xml += '</urlset>'
+    return make_response(xml), 200, {'Content-Type': 'application/xml'}
+
+
+@app.route('/for/<slug>')
+def pseo_page(slug):
+    vertical = next((v for v in PSEO_VERTICALS if v['slug'] == slug), None)
+    if not vertical:
+        abort(404)
+    return render_template('pseo_page.html', v=vertical, faqs=GEO_FAQS[:3])
+
+
+@app.route('/use-cases')
+def use_cases():
+    return render_template('use_cases.html', verticals=PSEO_VERTICALS)
+
+
+@app.route('/blog/<slug>')
+def blog_post(slug):
+    post = next((p for p in BLOG_POSTS if p['slug'] == slug), None)
+    if not post:
+        abort(404)
+    return render_template('blog_post.html', post=post)
+
+
+@app.route('/blog')
+def blog_index():
+    return render_template('blog_index.html', posts=BLOG_POSTS)
+
+
+@app.route('/faq')
+def faq_page():
+    return render_template('faq_page.html', faqs=GEO_FAQS)
+
+
 # ========== BILLING ==========
 
 @app.route('/pricing')
@@ -509,6 +616,11 @@ def stripe_webhook():
 
 with app.app_context():
     db.create_all()
+    # Seed pSEO verticals if not exist
+    if not os.path.exists(os.path.join(app.root_path, 'templates', 'pages')):
+        os.makedirs(os.path.join(app.root_path, 'templates', 'pages'), exist_ok=True)
+    if not os.path.exists(os.path.join(app.root_path, 'templates', 'blog')):
+        os.makedirs(os.path.join(app.root_path, 'templates', 'blog'), exist_ok=True)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}Testimonial Widget for {{ v.title }} — Praiso{% endblock %}
+{% block head %}
+<meta name="description" content="{{ v.desc }}">
+<meta name="keywords" content="{{ v.keyword }}, testimonials, social proof, {{ v.title|lower }}">
+<link rel="canonical" href="{{ request.url }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Praiso Testimonial Widget for {{ v.title }}",
+  "description": "{{ v.desc }}",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "127"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for faq in faqs %}
+    {
+      "@type": "Question",
+      "name": "{{ faq.q }}",
+      "acceptedAnswer": {"@type": "Answer", "text": "{{ faq.a }}"}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/use-cases" class="text-sm text-gray-600 hover:text-gray-900">Use Cases</a>
+    <a href="/blog" class="text-sm text-gray-600 hover:text-gray-900">Blog</a>
+    <a href="/pricing" class="text-sm text-gray-600 hover:text-gray-900">Pricing</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+
+<section class="pt-20 pb-12 px-6">
+<div class="max-w-4xl mx-auto">
+  <div class="text-center mb-12">
+    <p class="text-indigo-600 font-medium text-sm mb-3">TESTIMONIAL WIDGET FOR {{ v.title|upper }}</p>
+    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+      Social proof for <span class="text-indigo-600">{{ v.title }}</span>
+    </h1>
+    <p class="text-xl text-gray-500 max-w-2xl mx-auto mb-8">{{ v.desc }}</p>
+    <a href="/signup" class="bg-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-indigo-700 shadow-lg shadow-indigo-200 inline-block">
+      Start collecting testimonials — free
+    </a>
+    <p class="text-sm text-gray-400 mt-3">No credit card required. 10 free testimonials.</p>
+  </div>
+
+  <div class="bg-white border rounded-2xl p-8 mb-12">
+    <h2 class="text-2xl font-bold mb-6">How {{ v.title }} Use Praiso</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div>
+        <div class="text-2xl mb-2">1️⃣</div>
+        <h3 class="font-semibold mb-1">Send a collection link</h3>
+        <p class="text-sm text-gray-500">Share your branded Praiso page with customers via email, Slack, or your website.</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">2️⃣</div>
+        <h3 class="font-semibold mb-1">Curate the best</h3>
+        <p class="text-sm text-gray-500">Review and approve testimonials in your dashboard. Feature your strongest ones.</p>
+      </div>
+      <div>
+        <div class="text-2xl mb-2">3️⃣</div>
+        <h3 class="font-semibold mb-1">Embed on your site</h3>
+        <p class="text-sm text-gray-500">One script tag. Beautiful carousel, grid, or wall of love. Light or dark theme.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+    {% for faq in faqs %}
+      <details class="bg-white border rounded-xl p-5 group">
+        <summary class="flex items-center justify-between cursor-pointer font-medium text-gray-900">
+          {{ faq.q }}
+          <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <p class="text-gray-600 mt-3 text-sm leading-relaxed">{{ faq.a }}</p>
+      </details>
+    {% endfor %}
+    </div>
+  </div>
+
+  <div class="text-center py-12 bg-indigo-50 rounded-2xl">
+    <h2 class="text-2xl font-bold mb-4">Ready to collect testimonials?</h2>
+    <a href="/signup" class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 inline-block">Start free — 10 testimonials included</a>
+  </div>
+</div>
+</section>
+
+<footer class="py-8 px-6 text-center text-sm text-gray-400">
+  <p>© 2026 Praiso. <a href="/use-cases" class="text-indigo-500">Use Cases</a> · <a href="/blog" class="text-indigo-500">Blog</a> · <a href="/faq" class="text-indigo-500">FAQ</a> · <a href="/pricing" class="text-indigo-500">Pricing</a></p>
+</footer>
+{% endblock %}
