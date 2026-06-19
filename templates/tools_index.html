@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Free Testimonial Tools — Praiso{% endblock %}
+{% block head %}<meta name="description" content="Free tools for collecting and displaying testimonials. Email generators, calculators, and more. No signup required.">{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/use-cases" class="text-sm text-gray-600">Use Cases</a>
+    <a href="/blog" class="text-sm text-gray-600">Blog</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+<section class="py-16 px-6">
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-4xl font-bold text-center mb-4">Free Testimonial Tools</h1>
+  <p class="text-gray-500 text-center mb-12">No signup required. Use them right now.</p>
+  <div class="grid md:grid-cols-2 gap-6">
+    <a href="/tools/testimonial-email-generator" class="bg-white border rounded-xl p-6 hover:border-indigo-300 transition block">
+      <div class="text-2xl mb-3">✉️</div>
+      <h3 class="font-semibold mb-2">Testimonial Request Email Generator</h3>
+      <p class="text-sm text-gray-500">Generate the perfect email to ask your customers for a testimonial. Three tones, fully customizable.</p>
+    </a>
+    <div class="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-6">
+      <div class="text-2xl mb-3">🧮</div>
+      <h3 class="font-semibold mb-2 text-gray-400">Social Proof ROI Calculator</h3>
+      <p class="text-sm text-gray-400">Coming soon. Calculate how much revenue testimonials could add to your business.</p>
+    </div>
+    <div class="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-6">
+      <div class="text-2xl mb-3">🎨</div>
+      <h3 class="font-semibold mb-2 text-gray-400">Widget Preview Tool</h3>
+      <p class="text-sm text-gray-400">Coming soon. See what a Praiso testimonial widget would look like on your site.</p>
+    </div>
+    <div class="bg-gray-50 border border-dashed border-gray-300 rounded-xl p-6">
+      <div class="text-2xl mb-3">📋</div>
+      <h3 class="font-semibold mb-2 text-gray-400">Testimonial Question Bank</h3>
+      <p class="text-sm text-gray-400">Coming soon. 50+ proven questions to ask your customers for better testimonials.</p>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

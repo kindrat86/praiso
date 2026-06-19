@@ -408,6 +408,22 @@ PSEO_VERTICALS = [
     {"slug": "course-creators", "title": "Course Creators", "desc": "Student success stories that sell your next cohort.", "keyword": "testimonial widget for online courses"},
     {"slug": "therapists", "title": "Therapists", "desc": "Trusted client reviews that help new patients choose you with confidence.", "keyword": "testimonial widget for therapists"},
     {"slug": "weddings", "title": "Wedding Vendors", "desc": "Happy couple testimonials that book your next season.", "keyword": "testimonial widget for wedding vendors"},
+    {"slug": "newsletters", "title": "Newsletter Writers", "desc": "Subscriber testimonials that grow your list. Social proof for paid newsletters.", "keyword": "testimonial widget for newsletters"},
+    {"slug": "podcasts", "title": "Podcasters", "desc": "Listener reviews that attract sponsors and new subscribers.", "keyword": "testimonial widget for podcasts"},
+    {"slug": "nextjs", "title": "Next.js Sites", "desc": "Drop a testimonial widget into your Next.js app with one script tag.", "keyword": "testimonial widget for Next.js"},
+    {"slug": "framer", "title": "Framer Sites", "desc": "Beautiful testimonial widgets that match your Framer design.", "keyword": "testimonial widget for Framer"},
+    {"slug": "squarespace", "title": "Squarespace Sites", "desc": "Add customer testimonials to Squarespace without plugins.", "keyword": "testimonial widget for Squarespace"},
+    {"slug": "wix", "title": "Wix Sites", "desc": "Embed testimonials on Wix in 60 seconds. No coding required.", "keyword": "testimonial widget for Wix"},
+]
+
+COMPETITORS = [
+    {"slug": "senja", "name": "Senja", "price": "$29/mo", "weakness": "Complex pricing with per-project add-ons. 15 testimonial limit on free tier.", "url": "senja.io"},
+    {"slug": "famewall", "name": "Famewall", "price": "$9.99/mo", "weakness": "Limited to 1 wall on free tier. Video capped at 2 min recording.", "url": "famewall.io"},
+    {"slug": "testimonial-to", "name": "Testimonial.to", "price": "$25/mo", "weakness": "Only 2 video testimonials on free tier. Gets expensive fast at $50-95/mo.", "url": "testimonial.to"},
+    {"slug": "shoutout", "name": "Shoutout", "price": "$24/mo", "weakness": "Smaller feature set. Less widget variety.", "url": "shoutout.so"},
+    {"slug": "endorsal", "name": "Endorsal", "price": "$39/mo", "weakness": "No free tier at all. Higher starting price.", "url": "endorsal.com"},
+    {"slug": "trustmary", "name": "Trustmary", "price": "$19/mo", "weakness": "Focused on reviews more than testimonials. Complex enterprise positioning.", "url": "trustmary.com"},
+    {"slug": "elfsight", "name": "Elfsight", "price": "$5/mo", "weakness": "Generic widget platform, not testimonial-focused. Limited customization for testimonials.", "url": "elfsight.com"},
 ]
 
 BLOG_POSTS = [
@@ -452,6 +468,11 @@ def sitemap():
         pages.append((f'/for/{v["slug"]}', '0.7', 'monthly'))
     for p in BLOG_POSTS:
         pages.append((f'/blog/{p["slug"]}', '0.7', 'weekly'))
+    for c in COMPETITORS:
+        pages.append((f'/compare/{c["slug"]}', '0.8', 'monthly'))
+    pages.append(('/compare', '0.7', 'monthly'))
+    pages.append(('/tools', '0.7', 'monthly'))
+    pages.append(('/tools/testimonial-email-generator', '0.8', 'monthly'))
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -490,6 +511,78 @@ def blog_index():
 @app.route('/faq')
 def faq_page():
     return render_template('faq_page.html', faqs=GEO_FAQS)
+
+
+@app.route('/compare/<slug>')
+def compare_page(slug):
+    comp = next((c for c in COMPETITORS if c['slug'] == slug), None)
+    if not comp:
+        abort(404)
+    return render_template('compare_page.html', comp=comp)
+
+
+@app.route('/compare')
+def compare_index():
+    return render_template('compare_index.html', competitors=COMPETITORS)
+
+
+@app.route('/tools/testimonial-email-generator', methods=['GET', 'POST'])
+def tool_email_generator():
+    result = None
+    if request.method == 'POST':
+        company = request.form.get('company', 'your company').strip()
+        product = request.form.get('product', 'our product').strip()
+        customer_name = request.form.get('customer_name', '').strip()
+        tone = request.form.get('tone', 'friendly')
+
+        greeting = f"Hi {customer_name}," if customer_name else "Hi there,"
+
+        if tone == 'casual':
+            result = f"""{greeting}
+
+Quick favor: we'd love to hear what you think about {product}!
+
+If you have 30 seconds, could you leave us a short testimonial? Just click the link below and share your experience.
+
+[Your Praiso collection link here]
+
+No pressure at all. But if {product} has helped you, your words would mean the world to us (and help others like you find us).
+
+Thanks!
+The {company} team"""
+        elif tone == 'professional':
+            result = f"""{greeting}
+
+I hope this message finds you well. As a valued customer of {company}, your feedback is incredibly important to us.
+
+We would be grateful if you could take a moment to share your experience with {product}. Your testimonial helps us improve and helps other professionals make informed decisions.
+
+You can submit your testimonial here: [Your Praiso collection link here]
+
+It takes less than 60 seconds, and we truly appreciate your time.
+
+Best regards,
+The {company} team"""
+        else:
+            result = f"""{greeting}
+
+Thanks for being a {company} customer! We're so glad you chose {product}.
+
+Would you mind sharing a quick testimonial about your experience? It really helps other people like you decide if we're the right fit.
+
+Here's the link: [Your Praiso collection link here]
+
+Even just 2-3 sentences would be amazing. What result did you get? What did you like most?
+
+Thanks so much,
+The {company} team"""
+
+    return render_template('tool_email_gen.html', result=result)
+
+
+@app.route('/tools')
+def tools_index():
+    return render_template('tools_index.html')
 
 
 # ========== BILLING ==========

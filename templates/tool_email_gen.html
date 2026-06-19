@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Free Testimonial Request Email Generator — Praiso{% endblock %}
+{% block head %}
+<meta name="description" content="Generate a testimonial request email in seconds. Choose your tone, customize for your business, copy and send. Free, no signup required.">
+<meta name="keywords" content="testimonial request email template, ask for testimonial email, testimonial email generator">
+{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/tools" class="text-sm text-gray-600">Free Tools</a>
+    <a href="/pricing" class="text-sm text-gray-600">Pricing</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+
+<section class="py-16 px-6">
+<div class="max-w-3xl mx-auto">
+  <div class="text-center mb-10">
+    <p class="text-indigo-600 font-medium text-sm mb-2">FREE TOOL</p>
+    <h1 class="text-4xl font-bold mb-4">Testimonial Request Email Generator</h1>
+    <p class="text-gray-500">Generate the perfect email to ask your customers for a testimonial. Free, no signup required.</p>
+  </div>
+
+  <form method="POST" class="bg-white border rounded-2xl p-8 space-y-5 mb-8">
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Your company name</label>
+      <input type="text" name="company" placeholder="Acme Inc" class="w-full border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" value="{{ request.form.get('company', '') }}">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Your product/service name</label>
+      <input type="text" name="product" placeholder="our design tool" class="w-full border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" value="{{ request.form.get('product', '') }}">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Customer's first name (optional)</label>
+      <input type="text" name="customer_name" placeholder="Sarah" class="w-full border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" value="{{ request.form.get('customer_name', '') }}">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Tone</label>
+      <div class="flex gap-4">
+        <label class="flex items-center gap-2"><input type="radio" name="tone" value="friendly" checked class="text-indigo-600"> Friendly</label>
+        <label class="flex items-center gap-2"><input type="radio" name="tone" value="casual" class="text-indigo-600"> Casual</label>
+        <label class="flex items-center gap-2"><input type="radio" name="tone" value="professional" class="text-indigo-600"> Professional</label>
+      </div>
+    </div>
+    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700">Generate Email</button>
+  </form>
+
+  {% if result %}
+  <div class="bg-white border rounded-2xl p-8 mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-semibold">Your testimonial request email</h2>
+      <button onclick="navigator.clipboard.writeText(document.getElementById('email-result').innerText)" class="text-sm bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-lg hover:bg-indigo-100 font-medium">Copy</button>
+    </div>
+    <pre id="email-result" class="bg-gray-50 p-6 rounded-xl text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{{ result }}</pre>
+  </div>
+
+  <div class="bg-indigo-50 rounded-2xl p-8 text-center">
+    <h3 class="text-lg font-bold mb-2">Want to collect testimonials automatically?</h3>
+    <p class="text-gray-500 text-sm mb-4">Instead of emailing and collecting responses manually, use Praiso's collection page. Send one link, customers submit directly, you approve and embed.</p>
+    <a href="/signup" class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 inline-block">Start free — automate testimonial collection</a>
+  </div>
+  {% endif %}
+</div>
+</section>
+{% endblock %}

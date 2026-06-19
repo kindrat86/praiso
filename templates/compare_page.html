@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Praiso vs {{ comp.name }} — Best {{ comp.name }} Alternative{% endblock %}
+{% block head %}
+<meta name="description" content="Compare Praiso vs {{ comp.name }}. See features, pricing, and why teams switch from {{ comp.name }} to Praiso.">
+<meta name="keywords" content="{{ comp.name }} alternative, Praiso vs {{ comp.name }}, {{ comp.name }} competitor">
+<link rel="canonical" href="{{ request.url }}">
+{% endblock %}
+{% block content %}
+<nav class="bg-white border-b">
+<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <a href="/" class="text-xl font-extrabold text-indigo-600">✦ Praiso</a>
+  <div class="flex items-center gap-4">
+    <a href="/compare" class="text-sm text-gray-600">Compare</a>
+    <a href="/pricing" class="text-sm text-gray-600">Pricing</a>
+    <a href="/signup" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Start Free</a>
+  </div>
+</div>
+</nav>
+
+<section class="py-16 px-6">
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-4xl font-bold text-center mb-4">Praiso vs {{ comp.name }}</h1>
+  <p class="text-gray-500 text-center mb-12 max-w-2xl mx-auto">Looking for a {{ comp.name }} alternative? See how Praiso compares on features, pricing, and simplicity.</p>
+
+  <div class="bg-white border rounded-2xl overflow-hidden mb-12">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50">
+        <tr><th class="px-6 py-4 text-left">Feature</th><th class="px-6 py-4 text-center text-indigo-600 font-bold">Praiso</th><th class="px-6 py-4 text-center text-gray-500">{{ comp.name }}</th></tr>
+      </thead>
+      <tbody class="divide-y">
+        <tr><td class="px-6 py-3">Free tier</td><td class="px-6 py-3 text-center text-green-600 font-medium">✓ 10 testimonials</td><td class="px-6 py-3 text-center text-amber-600">Limited</td></tr>
+        <tr><td class="px-6 py-3">Starting price</td><td class="px-6 py-3 text-center font-bold text-indigo-600">$29/mo</td><td class="px-6 py-3 text-center">{{ comp.price }}</td></tr>
+        <tr><td class="px-6 py-3">Collection page</td><td class="px-6 py-3 text-center text-green-600">✓</td><td class="px-6 py-3 text-center text-green-600">✓</td></tr>
+        <tr><td class="px-6 py-3">Embeddable widget</td><td class="px-6 py-3 text-center text-green-600">✓</td><td class="px-6 py-3 text-center text-green-600">✓</td></tr>
+        <tr><td class="px-6 py-3">Star ratings</td><td class="px-6 py-3 text-center text-green-600">✓</td><td class="px-6 py-3 text-center text-green-600">✓</td></tr>
+        <tr><td class="px-6 py-3">One-line embed code</td><td class="px-6 py-3 text-center text-green-600 font-medium">✓ Single script tag</td><td class="px-6 py-3 text-center">Varies</td></tr>
+        <tr><td class="px-6 py-3">Moderation</td><td class="px-6 py-3 text-center text-green-600">✓</td><td class="px-6 py-3 text-center text-green-600">✓</td></tr>
+        <tr><td class="px-6 py-3">Carousel + Grid + Wall</td><td class="px-6 py-3 text-center text-green-600">✓</td><td class="px-6 py-3 text-center text-green-600">✓</td></tr>
+        <tr><td class="px-6 py-3">Setup time</td><td class="px-6 py-3 text-center text-indigo-600 font-medium">60 seconds</td><td class="px-6 py-3 text-center">5-15 min</td></tr>
+        <tr><td class="px-6 py-3">Complexity</td><td class="px-6 py-3 text-center text-indigo-600 font-medium">Dead simple</td><td class="px-6 py-3 text-center">{{ comp.weakness.split('.')[0] }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bg-indigo-50 rounded-2xl p-8 text-center mb-12">
+    <h2 class="text-2xl font-bold mb-4">Why teams switch from {{ comp.name }} to Praiso</h2>
+    <p class="text-gray-600 mb-6">{{ comp.weakness }}</p>
+    <p class="text-gray-700 mb-6">Praiso is built for simplicity. No complex pricing, no feature overload. Collect testimonials, approve the best ones, embed on your site. Done.</p>
+    <a href="/signup" class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 inline-block">Try Praiso free — 10 testimonials included</a>
+  </div>
+</div>
+</section>
+{% endblock %}
